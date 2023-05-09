@@ -192,7 +192,7 @@ class PawsxProcessor(DataProcessor):
 
     def get_translate_train_examples(self, data_dir):
         lg = self.language if self.train_language is None else self.train_language
-        lines = self._read_tsv(os.path.join(data_dir, "translate-train/en-{}-translated.tsv".format(lg)))
+        lines = self._read_tsv(os.path.join(data_dir, "en-{}-translated.tsv".format(lg)))
         examples = []
         for (i, line) in enumerate(lines):
             guid = "%s-%s" % ("translate", i)
@@ -231,7 +231,7 @@ class PawsxProcessor(DataProcessor):
         """See base class."""
         lg = self.language if self.train_language is None else self.train_language
 
-        lines = self._read_tsv(os.path.join(data_dir, "translate-train/en-{}-translated.tsv".format(lg)))
+        lines = self._read_tsv(os.path.join(data_dir, "en-{}-translated.tsv".format(lg)))
         dict = {}
         cnt = {}
         for (i, line) in enumerate(lines):
@@ -304,7 +304,7 @@ class XnliProcessor(DataProcessor):
 
     def get_translate_train_examples(self, data_dir):
         lg = self.language if self.train_language is None else self.train_language
-        lines = self._read_tsv(os.path.join(data_dir, "translate-train/en-{}-translated.tsv".format(lg)))
+        lines = self._read_tsv(os.path.join(data_dir, "en-{}-translated.tsv".format(lg)))
         examples = []
         for (i, line) in enumerate(lines):
             guid = "%s-%s" % ("train", i)
@@ -319,7 +319,7 @@ class XnliProcessor(DataProcessor):
         """See base class."""
         lg = self.language if self.train_language is None else self.train_language
 
-        lines = self._read_tsv(os.path.join(data_dir, "translate-train/en-{}-translated.tsv".format(lg)))
+        lines = self._read_tsv(os.path.join(data_dir, "en-{}-translated.tsv".format(lg)))
         dict = {}
         cnt = {}
         for (i, line) in enumerate(lines):

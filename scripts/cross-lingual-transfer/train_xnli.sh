@@ -13,6 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+conda_setup="/home/smg/$(whoami)/miniconda3/etc/profile.d/conda.sh"
+if [[ -f "${conda_setup}" ]]; then
+  #shellcheck disable=SC1090
+  . "${conda_setup}"
+  conda activate xtune
+fi
+
 REPO=$PWD
 MODEL=${1:-"xlm-roberta-base"}
 STAGE=${2:-1}
@@ -24,7 +31,7 @@ SEED=${6:-1}
 export CUDA_VISIBLE_DEVICES=$GPU
 
 TASK='xnli'
-TRANSLATION_PATH=$DATA_DIR/xtreme_translations/XNLI/
+TRANSLATION_PATH=$DATA_DIR/xtreme_translations/XNLI/translate-train/
 MODEL_PATH=$DATA_DIR/$MODEL
 EPOCH=10
 MAXL=256
@@ -69,7 +76,6 @@ if [ $STAGE == 1 ]; then
         --logging_each_epoch \
         --gpu_id 0 \
         --seed $SEED \
-        --fp16 --fp16_opt_level O2 \
         --warmup_steps -1 \
         --enable_r1_loss \
         --r1_lambda $R1_LAMBDA \
@@ -106,7 +112,6 @@ elif [ $STAGE == 2 ]; then
         --logging_each_epoch \
         --gpu_id 0 \
         --seed $SEED \
-        --fp16 --fp16_opt_level O2 \
         --warmup_steps -1 \
         --enable_r1_loss \
         --r1_lambda $R1_LAMBDA \
